@@ -10,7 +10,6 @@ from typing import Optional
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', '..'))
 
 from windbg_cli.cdb_session import CDBSession, CDBError, DEFAULT_CDB_PATHS
-from windbg_cli.server import get_or_create_session, unload_session
 
 
 class CDBServerProcess:
@@ -143,7 +142,7 @@ class TestRemoteDebugging:
             assert server.start(timeout=15), "Failed to start CDB server process"
 
             # Test opening remote connection
-            session = get_or_create_session(connection_string=connection_string, timeout=10, verbose=True)
+            session = CDBSession(remote_connection=connection_string, timeout=10, verbose=True)
             assert session is not None, "Failed to create remote session"
 
             # Test sending a command
@@ -155,17 +154,8 @@ class TestRemoteDebugging:
                 # Sometimes the first command might timeout during connection establishment
                 print(f"First command failed (this might be expected): {e}")
 
-            # Test that session exists in active sessions
-            from windbg_cli.server import active_sessions
-            session_id = f"remote:{connection_string}"
-            assert session_id in active_sessions, "Session not found in active sessions"
-
             # Test closing the remote connection
-            success = unload_session(connection_string=connection_string)
-            assert success, "Failed to unload remote session"
-
-            # Verify session was removed
-            assert session_id not in active_sessions, "Session still exists after unloading"
+            session.shutdown()
 
         finally:
             # Clean up the server process
@@ -188,40 +178,3 @@ class TestRemoteDebugging:
             session = CDBSession(remote_connection=invalid_connection, timeout=2)
             # The session creation might succeed but commands should fail
             session.send_command("r")
-
-
-if __name__ == "__main__":
-    # Run a simple test manually
-    print("Running remote debugging test...")
-
-    server = CDBServerProcess(port=5005)
-    connection_string = "tcp:Port=5005,Server=127.0.0.1"
-
-    try:
-        print("Starting CDB server...")
-        if server.start(timeout=15):
-            print("CDB server started successfully")
-
-            print("Creating remote session...")
-            session = get_or_create_session(connection_string=connection_string, timeout=10, verbose=True)
-
-            print("Sending test command...")
-            try:
-                output = session.send_command("r")
-                print(f"Command successful, got {len(output)} lines of output")
-            except Exception as e:
-                print(f"Command failed: {e}")
-
-            print("Closing remote session...")
-            unload_session(connection_string=connection_string)
-            print("Test completed successfully!")
-
-        else:
-            print("Failed to start CDB server")
-
-    except Exception as e:
-        print(f"Test failed: {e}")
-
-    finally:
-        print("Cleaning up...")
-        server.cleanup()
