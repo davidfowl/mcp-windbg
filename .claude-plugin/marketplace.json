@@ -1,0 +1,13 @@
+{
+    "name": "mcp-windbg",
+    "owner": {
+        "name": "davidfowl"
+    },
+    "plugins": [
+        {
+            "name": "windbg-cli",
+            "source": "./skills/windbg-cli",
+            "description": "Analyze Windows crash dumps and debug processes using WinDbg/CDB from the command line. Triage crashes, inspect threads, view stack traces, and run debugger commands."
+        }
+    ]
+}

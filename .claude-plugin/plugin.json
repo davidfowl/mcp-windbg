@@ -1,0 +1,8 @@
+{
+    "name": "mcp-windbg",
+    "description": "Windows crash dump analysis CLI tools with SKILLS for coding agents. Analyze crash dumps, inspect threads, view stack traces using WinDbg/CDB.",
+    "version": "0.12.2",
+    "author": {
+        "name": "davidfowl"
+    }
+}

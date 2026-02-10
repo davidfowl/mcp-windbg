@@ -26,6 +26,7 @@ dependencies = [
 
 [project.scripts]
 mcp-windbg = "mcp_windbg:main"
+mcp-windbg-cli = "mcp_windbg.cli:main"
 
 [build-system]
 requires = ["setuptools>=42", "wheel"]
