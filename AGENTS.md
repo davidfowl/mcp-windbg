@@ -1,12 +1,12 @@
-# mcp-windbg Development Guide
+# windbg-cli Development Guide
 
-This document describes the repository structure, development workflows, and release process for the mcp-windbg project.
+This document describes the repository structure, development workflows, and release process for the windbg-cli project.
 
 ## Repository Structure
 
 ```
-mcp-windbg/
-├── src/mcp_windbg/           # Main source code
+windbg-cli/
+├── src/windbg_cli/           # Main source code
 │   ├── __init__.py           # Entry point, CLI argument parsing
 │   ├── __main__.py           # Module entry point
 │   ├── server.py             # MCP server implementation
@@ -94,7 +94,7 @@ Follow [Keep a Changelog](https://keepachangelog.com/) format:
 .\scripts\check-version-consistency.ps1
 
 # Run tests locally
-uv run pytest src/mcp_windbg/tests/ -v
+uv run pytest src/windbg_cli/tests/ -v
 
 # Commit changes
 git add pyproject.toml server.json CHANGELOG.md
@@ -131,23 +131,23 @@ uv sync --dev
 ### Run All Tests
 
 ```powershell
-uv run pytest src/mcp_windbg/tests/ -v
+uv run pytest src/windbg_cli/tests/ -v
 ```
 
 ### Run Specific Test Files
 
 ```powershell
 # Core CDB tests
-uv run pytest src/mcp_windbg/tests/test_cdb.py -v
+uv run pytest src/windbg_cli/tests/test_cdb.py -v
 
 # Remote debugging tests
-uv run pytest src/mcp_windbg/tests/test_remote_debugging.py -v
+uv run pytest src/windbg_cli/tests/test_remote_debugging.py -v
 ```
 
 ### Test Requirements
 
 - Tests require a working CDB installation (auto-detected from common paths)
-- Test dump files are stored in `src/mcp_windbg/tests/dumps/` via Git LFS
+- Test dump files are stored in `src/windbg_cli/tests/dumps/` via Git LFS
 - Remote debugging tests may take longer due to server setup/teardown
 
 ## Development Workflow
@@ -159,10 +159,10 @@ uv run pytest src/mcp_windbg/tests/test_remote_debugging.py -v
 uv sync --dev
 
 # Run the server locally (stdio mode)
-uv run python -m mcp_windbg --verbose
+uv run python -m windbg_cli --verbose
 
 # Run with HTTP transport
-uv run python -m mcp_windbg --transport streamable-http --port 8000
+uv run python -m windbg_cli --transport streamable-http --port 8000
 ```
 
 ### Code Quality
@@ -174,8 +174,8 @@ The project uses:
 
 ### Adding New Features
 
-1. Create/modify code in `src/mcp_windbg/`
-2. Add corresponding tests in `src/mcp_windbg/tests/`
+1. Create/modify code in `src/windbg_cli/`
+2. Add corresponding tests in `src/windbg_cli/tests/`
 3. Update CHANGELOG.md with the new feature
 4. Run tests locally before pushing
 

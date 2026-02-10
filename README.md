@@ -1,4 +1,4 @@
-# mcp-windbg
+# windbg-cli
 
 WinDbg/CDB crash dump analysis CLI tools with **SKILLS** for coding agents.
 
@@ -45,16 +45,16 @@ curl -o .claude/skills/windbg-cli/SKILL.md \
 
 ```bash
 # List available crash dumps
-uv run --from mcp-windbg mcp-windbg-cli list-dumps
+uv run --from windbg-cli windbg list-dumps
 
 # Analyze a dump with full details
-uv run --from mcp-windbg mcp-windbg-cli analyze C:\path\to\crash.dmp --all
+uv run --from windbg-cli windbg analyze C:\path\to\crash.dmp --all
 
 # Run a single WinDbg command
-uv run --from mcp-windbg mcp-windbg-cli cmd --dump C:\path\to\crash.dmp -c "!analyze -v"
+uv run --from windbg-cli windbg cmd --dump C:\path\to\crash.dmp -c "!analyze -v"
 
 # Interactive WinDbg shell
-uv run --from mcp-windbg mcp-windbg-cli shell --dump C:\path\to\crash.dmp
+uv run --from windbg-cli windbg shell --dump C:\path\to\crash.dmp
 ```
 
 ## CLI Commands
@@ -80,8 +80,8 @@ uv run --from mcp-windbg mcp-windbg-cli shell --dump C:\path\to\crash.dmp
 You can also point your agent directly at the tool's help:
 
 ```
-Analyze C:\dumps\app.dmp using mcp-windbg-cli.
-Check uv run --from mcp-windbg mcp-windbg-cli --help for available commands.
+Analyze C:\dumps\app.dmp using windbg.
+Check uv run --from windbg-cli windbg --help for available commands.
 ```
 
 ## License

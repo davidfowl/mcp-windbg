@@ -1,5 +1,5 @@
 {
-    "name": "mcp-windbg",
+    "name": "windbg-cli",
     "owner": {
         "name": "davidfowl"
     },

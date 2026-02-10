@@ -1,6 +1,6 @@
 """Direct CLI for WinDbg/CDB crash dump analysis.
 
-Run with: uv run mcp-windbg-cli <command>
+Run with: uv run windbg <command>
 """
 
 import argparse
@@ -170,8 +170,8 @@ def cmd_shell(args: argparse.Namespace) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        prog="mcp-windbg-cli",
-        description="WinDbg/CDB crash dump analysis CLI (no MCP required)",
+        prog="windbg",
+        description="WinDbg/CDB crash dump analysis CLI",
     )
     parser.add_argument("--cdb-path", type=str, help="Custom path to cdb.exe")
     parser.add_argument("--symbols-path", type=str, help="Custom symbols path")

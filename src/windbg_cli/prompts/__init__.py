@@ -1,4 +1,4 @@
-"""Prompts package for mcp-windbg."""
+"""Prompts package for windbg-cli."""
 
 from pathlib import Path
 

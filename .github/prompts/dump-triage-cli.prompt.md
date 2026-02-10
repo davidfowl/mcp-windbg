@@ -1,30 +1,30 @@
 ---
-description: 'Analyze Windows crash dumps using the mcp-windbg-cli command-line tool (no MCP server required)'
+description: 'Analyze Windows crash dumps using the windbg command-line tool (no MCP server required)'
 ---
 
-Use the `mcp-windbg-cli` command-line tool to analyze Windows crash dumps directly from the terminal.
+Use the `windbg` command-line tool to analyze Windows crash dumps directly from the terminal.
 
 ## Available Commands
 
 ```
-uv run mcp-windbg-cli list-dumps [--directory DIR] [--recursive]
-uv run mcp-windbg-cli analyze <dump_path> [--stack] [--modules] [--threads] [--all]
-uv run mcp-windbg-cli cmd -c <command> (--dump <path> | --remote <conn>)
-uv run mcp-windbg-cli shell (--dump <path> | --remote <conn>)
+uv run windbg list-dumps [--directory DIR] [--recursive]
+uv run windbg analyze <dump_path> [--stack] [--modules] [--threads] [--all]
+uv run windbg cmd -c <command> (--dump <path> | --remote <conn>)
+uv run windbg shell (--dump <path> | --remote <conn>)
 ```
 
 ## WORKFLOW - Execute in this exact sequence:
 
 ### Step 1: Dump File Identification
 **If no dump file path provided:**
-- Run `uv run mcp-windbg-cli list-dumps` to discover available crash dumps.
+- Run `uv run windbg list-dumps` to discover available crash dumps.
 - If the user specifies a directory, use `--directory <path>` and optionally `--recursive`.
 
 ### Step 2: Comprehensive Dump Analysis
 **Analyze the specified dump file:**
 
 ```powershell
-uv run mcp-windbg-cli analyze <dump_path> --all
+uv run windbg analyze <dump_path> --all
 ```
 
 This automatically runs `!analyze -v`, `.lastevent`, and includes stack traces, modules, and threads.
@@ -34,11 +34,11 @@ If the dump is very large (>5GB) or analysis takes too long, the command may tim
 **Then extract additional metadata by running individual commands:**
 
 ```powershell
-uv run mcp-windbg-cli cmd --dump <dump_path> -c "vertarget"
-uv run mcp-windbg-cli cmd --dump <dump_path> -c ".time"
-uv run mcp-windbg-cli cmd --dump <dump_path> -c "!peb"
-uv run mcp-windbg-cli cmd --dump <dump_path> -c "r"
-uv run mcp-windbg-cli cmd --dump <dump_path> -c "k"
+uv run windbg cmd --dump <dump_path> -c "vertarget"
+uv run windbg cmd --dump <dump_path> -c ".time"
+uv run windbg cmd --dump <dump_path> -c "!peb"
+uv run windbg cmd --dump <dump_path> -c "r"
+uv run windbg cmd --dump <dump_path> -c "k"
 ```
 
 ### Step 3: Generate Structured Analysis Report
