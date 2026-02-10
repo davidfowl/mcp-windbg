@@ -9,8 +9,7 @@ import os
 import sys
 from typing import Optional
 
-from .cdb_session import CDBSession, CDBError
-from .server import get_local_dumps_path
+from .cdb_session import CDBSession, CDBError, get_local_dumps_path
 
 
 def _print_lines(lines: list[str]) -> None:

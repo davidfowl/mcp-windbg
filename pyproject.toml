@@ -17,15 +17,9 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
 ]
-dependencies = [
-    "mcp>=1.17.0",
-    "pydantic>=2.12.0",
-    "starlette>=0.40.0",
-    "uvicorn>=0.30.0",
-]
+dependencies = []
 
 [project.scripts]
-mcp-windbg = "mcp_windbg:main"
 mcp-windbg-cli = "mcp_windbg.cli:main"
 
 [build-system]
@@ -33,7 +27,7 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.package-data]
-mcp_windbg = ["prompts/*.prompt.md"]
+mcp_windbg = []
 
 [dependency-groups]
 dev = [

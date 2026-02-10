@@ -3,7 +3,28 @@ import threading
 import re
 import os
 import platform
+import winreg
 from typing import List, Optional
+
+
+def get_local_dumps_path() -> Optional[str]:
+    """Get the local dumps path from the Windows registry."""
+    try:
+        with winreg.OpenKey(
+            winreg.HKEY_LOCAL_MACHINE,
+            r"SOFTWARE\Microsoft\Windows\Windows Error Reporting\LocalDumps"
+        ) as key:
+            dump_folder, _ = winreg.QueryValueEx(key, "DumpFolder")
+            if os.path.exists(dump_folder) and os.path.isdir(dump_folder):
+                return dump_folder
+    except (OSError, WindowsError):
+        pass
+
+    default_path = os.path.join(os.environ.get("LOCALAPPDATA", ""), "CrashDumps")
+    if os.path.exists(default_path) and os.path.isdir(default_path):
+        return default_path
+
+    return None
 
 # Regular expression to detect CDB prompts
 PROMPT_REGEX = re.compile(r"^\d+:\d+>\s*$")

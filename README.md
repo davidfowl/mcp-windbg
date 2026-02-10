@@ -84,30 +84,6 @@ Analyze C:\dumps\app.dmp using mcp-windbg-cli.
 Check uv run --from mcp-windbg mcp-windbg-cli --help for available commands.
 ```
 
-## MCP Server
-
-This package also includes the original MCP server for use with MCP-compatible clients (VS Code, Claude Desktop, Cursor, etc.):
-
-```bash
-# stdio transport (default)
-uv run --from mcp-windbg mcp-windbg
-
-# HTTP transport
-uv run --from mcp-windbg mcp-windbg --transport streamable-http --port 8000
-```
-
-See the [upstream documentation](https://github.com/svnscha/mcp-windbg/wiki) for MCP server configuration details.
-
-## Examples
-
-```
-Analyze the crash dump at C:\dumps\app.dmp
-
-Show me the call stack and explain this access violation
-
-Connect to tcp:Port=5005,Server=192.168.0.100 and show me the current thread state
-```
-
 ## License
 
 MIT
